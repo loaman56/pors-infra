@@ -1,0 +1,19 @@
+{
+  "name": "pors-infra-robot",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "nodemon bot.js",
+    "check": "node scripts/check-env.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^16.4.5",
+    "openai": "^4.56.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
