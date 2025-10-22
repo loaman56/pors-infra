@@ -5,8 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AI Ops Starter Kit — Notion ↔ OpenAI</title>
   <meta name="description" content="Elke 5 min automatisch Summary + Next Actions in Notion. Draait 100% op jouw GitHub Actions. Installatie in 10 min.">
+  <!-- Canonical + favicon -->
+  <link rel="canonical" href="https://loaman56.github.io/pors-infra/">
+  <link rel="icon" href="/favicon.ico">
+  <!-- Open Graph -->
   <meta property="og:title" content="AI Ops Starter Kit — Notion ↔ OpenAI">
-  <meta property="og:description" content="Cron elke 5 min → Summary + Next Actions in je Notion database.">
+  <meta property="og:description" content="Cron elke 5 min → Summary + Next Actions in je Notion database. Draait 100% op jouw GitHub Actions.">
+  <meta property="og:url" content="https://loaman56.github.io/pors-infra/">
+  <meta property="og:image" content="https://loaman56.github.io/pors-infra/og.png">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Ops Starter Kit — Notion ↔ OpenAI">
+  <meta name="twitter:description" content="Elke 5 min automatisch Summary + Next Actions in Notion. Installatie in 10 min.">
+  <meta name="twitter:image" content="https://loaman56.github.io/pors-infra/og.png">
+  <meta name="theme-color" content="#111">
+
   <style>
     :root{--fg:#111;--muted:#555;--bg:#fff;--bd:#e7e7ea}
     *{box-sizing:border-box}
@@ -14,7 +27,7 @@
     .wrap{max-width:740px;margin:40px auto;padding:0 16px;line-height:1.6}
     h1{margin:0 0 10px;font-size:clamp(26px,4.5vw,36px)}
     p.lead{margin:0 0 18px;color:var(--muted)}
-    .row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px}
+    .row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
     .btn{display:inline-block;padding:12px 16px;border-radius:10px;text-decoration:none;border:1px solid #111;background:#111;color:#fff}
     .btn.secondary{background:#f7f7f8;color:#111;border:1px solid var(--bd)}
     ul{margin:14px 0;padding-left:18px}
@@ -22,52 +35,40 @@
     small{color:var(--muted)}
     code{background:#f6f6f7;padding:2px 6px;border-radius:6px}
     hr{border:none;border-top:1px solid var(--bd);margin:18px 0}
-    @media (max-width:480px){ .wrap{margin:28px auto} }<!-- €39 -->
-<a class="btn" href="https://jouw-betaalverzoek-39" rel="noopener" aria-label="Bestellen – €39 per betaalverzoek">
-  Bestellen – €39 (betaalverzoek)
-</a>
-
-<!-- €99 -->
-<a class="btn secondary" href="https://jouw-betaalverzoek-99" rel="noopener" aria-label="Installatieservice – €99">
-  Installatieservice €99
-</a>
-
-<!-- support-mail in SEPA-blok -->
-<a href="mailto:ron@jouwdomein.nl">ron@jouwdomein.nl</a>
-
+    @media (max-width:480px){ .wrap{margin:28px auto} }
   </style>
 </head>
 <body>
   <main class="wrap">
     <!-- HERO -->
     <h1>Elke 5 min automatisch <strong>Summary + Next Actions</strong> in Notion.</h1>
-    <p class="lead">Draait 100% op jouw GitHub Actions. Installatie in 10 min.</p>
+    <p class="lead">Draait 100% op jouw GitHub Actions. Installatie in ±10 min.</p>
 
     <div class="row">
-      <!-- Vul je betaalverzoek-link(s) in wanneer je ze hebt -->
-      <a class="btn" href="#" rel="noopener">Bestellen – €39 (betaalverzoek)</a>
-      <a class="btn secondary" href="#" rel="noopener">Installatieservice €99</a>
+      <!-- TODO: vervang # door je echte betaalverzoek-links -->
+      <a class="btn" href="#" rel="noopener" aria-label="Bestellen – €39 per betaalverzoek">Bestellen – €39 (betaalverzoek)</a>
+      <a class="btn secondary" href="#" rel="noopener" aria-label="Installatieservice – €99">Installatieservice €99</a>
     </div>
 
     <ul>
-      <li>Zet <em>Status = Needs AI</em> → ontvang <strong>Samenvatting</strong> + <strong>Volgende stappen</strong> in je Notion-item.</li>
-      <li>Cron elke 5 minuten · Dry-run modus · Structured output (Markdown/JSON → velden).</li>
-      <li>Werkt op je eigen infra (GitHub Actions + Notion). Geen extra tools.</li>
+      <li>Zet <em>Status = Needs AI</em> → je krijgt <strong>Samenvatting</strong> + <strong>Volgende stappen</strong> terug in Notion.</li>
+      <li>Cron elke 5 min • Dry-run • Structured output (Markdown/JSON → velden).</li>
+      <li>100% op je eigen infra (GitHub Actions + Notion). Geen extra tools.</li>
     </ul>
 
     <hr>
 
-    <!-- SECTIE: Wat je krijgt -->
+    <!-- WAT JE KRIJGT -->
     <h2 style="margin:10px 0 6px">Wat je krijgt</h2>
     <ul>
       <li>Kant-en-klare repo (TypeScript + workflow)</li>
-      <li>Templates, troubleshooting en README stap-voor-stap</li>
+      <li>Templates, troubleshooting en README (stap-voor-stap)</li>
       <li>Optioneel: installatie uitgevoerd + screenshots</li>
     </ul>
 
-    <!-- SEPA-BETALEN (direct verkoopbaar zonder link) -->
-    <section class="card">
-      <h3 style="margin:0 0 8px">Bestellen via bankoverschrijving (SEPA)</h3>
+    <!-- SEPA -->
+    <section class="card" aria-labelledby="sepa-title">
+      <h3 id="sepa-title" style="margin:0 0 8px">Bestellen via bankoverschrijving (SEPA)</h3>
       <ul style="margin:0">
         <li><strong>Product:</strong> AI Ops Starter Kit</li>
         <li><strong>Bedrag:</strong> €39</li>
@@ -75,21 +76,29 @@
         <li><strong>Naam rekening:</strong> Ron Pors</li>
         <li><strong>Omschrijving (verplicht):</strong> <code>AIOPS-&lt;jouw e-mail&gt;</code></li>
       </ul>
-      <p style="margin:10px 0 0"><small>Na betaling ontvang je de download en factuur per e-mail. Stuur eventueel je betaalbewijs mee.</small></p>
-    </section>
+      <p style="margin:10px 0 0">
+        <small>Na betaling ontvang je de download en factuur per e-mail. Stuur eventueel je betaalbewijs naar
+          <a href="mailto:support@example.com">support@example.com</a>.
+        </small>
+      </p>
 
-    <p style="margin:14px 0 0"><small>Tip: voeg je betaalverzoek-link toe in de knoppen hierboven zodra je die hebt. Vervang de <code>#</code> in de href.</small></p>
+      <details style="margin-top:10px">
+        <summary><strong>FAQ (kort)</strong></summary>
+        <ul>
+          <li><em>Werkt dit zonder extra tools?</em> Ja, alles draait op je eigen GitHub Actions + Notion.</li>
+          <li><em>Kan ik eerst testen?</em> Ja, er is een <strong>dry-run</strong> modus.</li>
+          <li><em>Andere veldnamen?</em> Er is een mapping (B + D) voor NL-labels.</li>
+        </ul>
+      </details>
+    </section>
 
     <hr>
     <p><small>Build OK • Laatste update: <span id="ts"></span></small></p>
+    <noscript><small>JavaScript staat uit; tijdstempel wordt niet getoond.</small></noscript>
   </main>
 
   <script>
-    // klein tijdstempeltje zodat je ziet dat de pagina vers is
     document.getElementById('ts').textContent = new Date().toISOString();
   </script>
 </body>
 </html>
-
-</html>
-
