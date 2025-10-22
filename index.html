@@ -1,145 +1,267 @@
 <!doctype html>
 <html lang="nl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>AI Ops Starter Kit — Notion ↔ OpenAI</title>
-  <meta name="description" content="Elke 5 min automatisch Summary + Next Actions in Notion. Draait 100% op jouw GitHub Actions. Installatie in 10 min.">
-  <link rel="canonical" href="https://loaman56.github.io/pors-infra/">
-  <link rel="icon" href="/favicon.ico">
-  <!-- Open Graph / Twitter (optioneel og.png toevoegen in de root) -->
-  <meta property="og:title" content="AI Ops Starter Kit — Notion ↔ OpenAI">
-  <meta property="og:description" content="Cron elke 5 min → Summary + Next Actions in je Notion database. Draait 100% op jouw GitHub Actions.">
-  <meta property="og:url" content="https://loaman56.github.io/pors-infra/">
-  <meta property="og:image" content="https://loaman56.github.io/pors-infra/og.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI Ops Starter Kit — Notion ↔ OpenAI">
-  <meta name="twitter:description" content="Elke 5 min automatisch Summary + Next Actions in Notion. Installatie in 10 min.">
-  <meta name="twitter:image" content="https://loaman56.github.io/pors-infra/og.png">
-  <meta name="theme-color" content="#111">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Robrada – Pors Infra | Documenten & Client Portals</title>
+  <meta name="description" content="Voorbeelden van klantportals, rapporten en SOP’s. Direct te kopiëren Notion-templates per branche." />
+  <meta name="theme-color" content="#0b0f14" />
+  <link rel="icon" href="assets/pors-infra-logo.png">
   <style>
-    :root{--fg:#111;--muted:#555;--bg:#fff;--bd:#e7e7ea}
+    /* ===== Pors Infra / Robrada theme ===== */
+    :root{
+      /* kleuren uit het logo */
+      --brand-blue: #0c6fbf;     /* blauw */
+      --brand-green:#2eb24d;     /* groen */
+      --brand-orange:#ff9f1a;    /* accent */
+      --bg:#0b0f14;              /* page */
+      --panel:#0f141b;           /* cards/panels */
+      --text:#eef5fb;
+      --muted:#94a3b8;
+      --chip:#121b24;
+      --radius:18px;
+      --shadow:0 12px 32px rgba(0,0,0,.35);
+      --glass: inset 0 1px 0 rgba(255,255,255,.06), 0 16px 40px rgba(0,0,0,.28);
+    }
+    @media (prefers-color-scheme: light){
+      :root{--bg:#f6f8fb;--panel:#fff;--text:#0f172a;--muted:#4b5563;--chip:#eef2f7;--shadow:0 14px 30px rgba(9,12,24,.08);--glass: inset 0 1px 0 rgba(255,255,255,.85), 0 14px 30px rgba(9,12,24,.07)}
+    }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
-    .wrap{max-width:740px;margin:40px auto;padding:0 16px;line-height:1.6}
-    h1{margin:0 0 10px;font-size:clamp(26px,4.5vw,36px)}
-    p.lead{margin:0 0 18px;color:var(--muted)}
-    .row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
-    .btn{display:inline-block;padding:12px 16px;border-radius:10px;text-decoration:none;border:1px solid #111;background:#111;color:#fff}
-    .btn.secondary{background:#f7f7f8;color:#111;border:1px solid var(--bd)}
-    .btn.ghost{background:#fff;color:#111;border:1px dashed var(--bd)}
-    ul{margin:14px 0;padding-left:18px}
-    .card{border:1px dashed var(--bd);border-radius:12px;padding:16px;margin-top:18px;background:#fff}
-    small{color:var(--muted)}
-    code{background:#f6f6f7;padding:2px 6px;border-radius:6px}
-    hr{border:none;border-top:1px solid var(--bd);margin:18px 0}
-    .note{font-size:12px;color:var(--muted)}
-    @media (max-width:480px){ .wrap{margin:28px auto} }
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      font:16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(900px 600px at 15% -10%, rgba(46,178,77,.18), transparent 40%),
+        radial-gradient(900px 800px at 110% 0%, rgba(12,111,191,.20), transparent 42%),
+        #0b0f14 url('assets/blueprint.jpg') center/cover fixed no-repeat;
+      background-blend-mode: screen, screen, multiply;
+    }
+    .container{max-width:1220px;margin:0 auto;padding:clamp(18px,2vw,32px)}
+    a{color:inherit;text-decoration:none}
+
+    /* buttons */
+    .btn{
+      display:inline-flex;align-items:center;gap:.6rem;
+      padding:.8rem 1rem;border-radius:12px;font-weight:700;letter-spacing:.2px;
+      background:linear-gradient(135deg,var(--brand-green),var(--brand-blue));
+      color:#031019;box-shadow:var(--shadow);
+    }
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.16)}
+
+    /* hero */
+    header.hero{
+      border-radius: clamp(18px,1.8vw,26px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(3,16,25,.0) 60%),
+        var(--panel);
+      box-shadow:var(--glass);padding: clamp(20px, 4vw, 48px);position:relative;overflow:hidden
+    }
+    .brand{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+    .brand img{height:56px;width:auto}
+    .brand h1{margin:0;font-size:clamp(26px,4.6vw,44px);letter-spacing:.2px}
+
+    .badges{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.1rem}
+    .badge{padding:.34rem .62rem;border-radius:999px;background:var(--chip);color:var(--muted);font-size:.82rem}
+    .actions{display:flex;gap:.6rem;flex-wrap:wrap}
+
+    /* grid & cards */
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:1024px){.grid.cols-3{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid.cols-3{grid-template-columns:1fr}}
+
+    .card{
+      background:var(--panel);border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);padding:18px;box-shadow:var(--glass);transition:.25s transform ease,.25s box-shadow ease
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,.35)}
+    .cover{
+      height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.06);
+      display:flex;align-items:center;justify-content:center;font-weight:800;letter-spacing:.3px;font-size:1rem;color:#e9fbff;
+      background:
+        conic-gradient(from 210deg at 70% 40%, rgba(255,255,255,.08), transparent 35%),
+        linear-gradient(135deg, rgba(46,178,77,.25), rgba(12,111,191,.25)),
+        #0f1720;
+    }
+    h3{margin:14px 0 8px;font-size:1.05rem}
+    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin:.3rem 0 .9rem}
+    .chip{background:var(--chip);padding:.28rem .6rem;border-radius:999px;font-size:.78rem;color:var(--muted)}
+    .filterbar{display:flex;gap:.5rem;flex-wrap:wrap;margin:12px 0 4px}
+    .filterbar button{background:var(--chip);color:var(--muted);border:1px solid transparent;border-radius:999px;padding:.44rem .8rem}
+    .filterbar button.active{border-color:var(--brand-orange);color:var(--text)}
+
+    footer{opacity:.85;color:var(--muted);margin:26px 0 6px;text-align:center}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(7,11,16,.6);backdrop-filter:blur(6px);z-index:50}
+    .modal.open{display:grid}
+    .panel{width:min(1100px,92vw);height:min(80vh,820px);background:var(--panel);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column}
+    .panel header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .panel header h4{margin:0;font-size:1rem}
+    .panel iframe{flex:1;width:100%;border:0;background:#fff}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,.16);color:var(--text);padding:.45rem .75rem;border-radius:10px}
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <div class="container">
     <!-- HERO -->
-    <h1>Elke 5 min automatisch <strong>Summary + Next Actions</strong> in Notion.</h1>
-    <p class="lead">Draait 100% op jouw GitHub Actions. Installatie in ±10 min. <span style="border:1px solid var(--bd);border-radius:999px;padding:2px 8px;margin-left:6px;font-size:90%">€39 • NL/EN</span></p>
+    <header class="hero">
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+        <div style="min-width:280px;flex:1">
+          <div class="brand">
+            <img src="assets/pors-infra-logo.png" alt="Pors Infra logo">
+            <h1>Robrada — Documenten & Client Portals</h1>
+          </div>
+          <p style="margin:.2rem 0 1rem;color:var(--muted);max-width:70ch">
+            20 strakke voorbeelden in de Pors-stijl. Notion-ready, snel te dupliceren en aan te passen. Live previews en branche-filters.
+          </p>
+          <div class="badges">
+            <span class="badge">Pors Infra</span>
+            <span class="badge">Groen/Blauw + Oranje accent</span>
+            <span class="badge">Notion-ready</span>
+            <span class="badge">Live preview</span>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#gallery">Bekijk voorbeelden</a>
+            <a class="btn secondary" href="https://github.com/loaman56/pors-infra" target="_blank" rel="noreferrer">GitHub project</a>
+          </div>
+        </div>
 
-    <!-- CTA's (werken direct via mail; vervang straks door klik-betaalverzoeken) -->
-    <div class="row">
-      <a id="cta39" class="btn" href="mailto:support@example.com?subject=Bestellen%20AI%20Ops%20Starter%20Kit%20%E2%82%AC39&body=Hi%2C%20ik%20wil%20de%20kit%20bestellen.%20Mijn%20e-mail%3A%20_____%0A"
-         target="_blank" rel="noopener noreferrer" aria-label="Bestellen – €39">
-        Bestellen – €39
-      </a>
-      <a id="cta99" class="btn secondary" href="mailto:support@example.com?subject=Installatieservice%20%E2%82%AC99&body=Hi%2C%20graag%20installatie.%20Mijn%20Notion-DB%20link%3A%20_____%0A"
-         target="_blank" rel="noopener noreferrer" aria-label="Installatie – €99">
-        Installatie €99
-      </a>
-      <button class="btn ghost" type="button" id="copyIban" aria-label="Kopieer IBAN">Kopieer IBAN</button>
-    </div>
+        <!-- Accent visual rechts -->
+        <div aria-hidden="true" style="margin-left:auto">
+          <div style="width:min(420px,92vw);aspect-ratio:4/3;border-radius:20px;
+              background:
+                radial-gradient(130% 100% at 12% 12%, rgba(255,255,255,.10), transparent 40%),
+                linear-gradient(135deg, rgba(46,178,77,.25), rgba(12,111,191,.25)),
+                #0f141b;
+              border:1px solid rgba(255,255,255,.08);box-shadow:var(--glass);">
+          </div>
+        </div>
+      </div>
+    </header>
 
-    <ul>
-      <li>Zet <em>Status = Needs AI</em> → je krijgt <strong>Samenvatting</strong> + <strong>Volgende stappen</strong> terug in Notion.</li>
-      <li>Cron elke 5 min • Dry-run • Structured output (Markdown/JSON → velden).</li>
-      <li>100% op je eigen infra (GitHub Actions + Notion). Geen extra tools.</li>
-    </ul>
-
-    <hr>
-
-    <!-- WAT JE KRIJGT -->
-    <h2 style="margin:10px 0 6px">Wat je krijgt</h2>
-    <ul>
-      <li>Kant-en-klare repo (TypeScript + workflow)</li>
-      <li>Templates, troubleshooting en README (stap-voor-stap)</li>
-      <li>Optioneel: installatie uitgevoerd + screenshots</li>
-    </ul>
-
-    <!-- SEPA -->
-    <section class="card" aria-labelledby="sepa-title">
-      <h3 id="sepa-title" style="margin:0 0 8px">Bestellen via bankoverschrijving (SEPA)</h3>
-      <ul style="margin:0">
-        <li><strong>Product:</strong> AI Ops Starter Kit</li>
-        <li><strong>Bedrag:</strong> €39</li>
-        <li><strong>IBAN:</strong> <span id="iban">NL13 BUNQ 2041 8380 94</span></li>
-        <li><strong>Naam rekening:</strong> Ron Pors</li>
-        <li><strong>Omschrijving (verplicht):</strong> <code>AIOPS-&lt;jouw e-mail&gt;</code></li>
-      </ul>
-      <p style="margin:10px 0 0">
-        <small>Na betaling ontvang je de download en factuur per e-mail. Stuur eventueel je betaalbewijs naar
-          <a id="supportEmail" href="mailto:support@example.com">support@example.com</a>.
-        </small>
-      </p>
-
-      <details style="margin-top:10px">
-        <summary><strong>FAQ (kort)</strong></summary>
-        <ul>
-          <li><em>Werkt dit zonder extra tools?</em> Ja, alles draait op je eigen GitHub Actions + Notion.</li>
-          <li><em>Kan ik eerst testen?</em> Ja, er is een <strong>dry-run</strong> modus.</li>
-          <li><em>Andere veldnamen?</em> Er is een mapping (NL-labels), dus je kunt je eigen property-namen gebruiken.</li>
-        </ul>
-      </details>
+    <!-- FILTERS + GRID -->
+    <section id="gallery" style="margin-top:22px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <h2 style="margin:8px 0">Voorbeelden (20)</h2>
+        <div class="filterbar" id="filters"></div>
+      </div>
+      <div class="grid cols-3" id="cards"></div>
     </section>
 
-    <hr>
-    <p class="note">Build OK • Laatste update: <span id="ts"></span></p>
-    <noscript><small>JavaScript staat uit; tijdstempel wordt niet getoond.</small></noscript>
-  </main>
+    <footer>
+      © <span id="y"></span> Pors Infra · Robrada
+    </footer>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="panel">
+      <header>
+        <h4 id="modalTitle">Preview</h4>
+        <div>
+          <a id="openDemo" class="btn" target="_blank" rel="noreferrer">Open demo</a>
+          <button class="ghost" id="close">Sluiten</button>
+        </div>
+      </header>
+      <iframe id="frame" title="Document preview"></iframe>
+    </div>
+  </div>
 
   <script>
-    // ======= Vul HIER (optioneel) je klik-betaalverzoeken in =======
-    // Laat leeg ("") als je nog geen link hebt; de knop valt dan terug op mailto.
-    const PAY_REQ_39 = ""; // bv. "https://bunq.me/ronpors/39/..."
-    const PAY_REQ_99 = ""; // bv. "https://bunq.me/ronpors/99/..."
-    const SUPPORT_EMAIL = "support@example.com"; // vervang door jouw adres (bv. "ron@jouwdomein.nl")
-    // ===============================================================
+    // 20 voorbeelden
+    const EXAMPLES = [
+      { id:'bouw-werkbon',        title:'Werkbon & opleverrapport',        branch:'Bouw',                   tags:['Werkbon','Foto’s','Handtekening'], demoUrl:'' },
+      { id:'civiel-inspectie',    title:'Inspectierapport Brug/Infra',     branch:'Civiele techniek',       tags:['Inspectie','Checklist','GPS'], demoUrl:'' },
+      { id:'installatie-storingen', title:'Storingsbon + onderhoud',       branch:'Installatietechniek',    tags:['Onderhoud','Planning'], demoUrl:'' },
+      { id:'architect-brief',     title:'Projectbrief + versiebeheer',     branch:'Architectuur',           tags:['Briefing','Revisies'], demoUrl:'' },
+      { id:'energie-rapport',     title:'Energie-scan (SOP + rapport)',    branch:'Energie',                 tags:['SOP','Template'], demoUrl:'' },
+      { id:'it-tickets',          title:'IT Tickets & SLA portal',          branch:'IT Dienstverlening',     tags:['SLA','Automations'], demoUrl:'' },
+      { id:'marketing-content',   title:'Contentkalender + taken',          branch:'Marketingbureau',        tags:['Kalender','Taken'], demoUrl:'' },
+      { id:'foto-shootsheet',     title:'Fotoshoot-sheet + levering',       branch:'Fotografie',             tags:['Deliverables','Klantportal'], demoUrl:'' },
+      { id:'ecom-product',        title:'Product-lancering (checklist)',    branch:'E-commerce',             tags:['Launch','Checklist'], demoUrl:'' },
+      { id:'horeca-haccp',        title:'HACCP dagcontrole',                branch:'Horeca',                 tags:['Checklist','Logboek'], demoUrl:'' },
+      { id:'event-runbook',       title:'Event runbook + draaiboek',        branch:'Evenementen',            tags:['Runbook','Team'], demoUrl:'' },
+      { id:'zorg-dossier',        title:'Praktijk-dossier (light)',         branch:'Zorgpraktijk',           tags:['Formulieren','Log'], demoUrl:'' },
+      { id:'sport-sponsoring',    title:'Sponsordossier + activaties',      branch:'Sportclub',              tags:['Deals','Taken'], demoUrl:'' },
+      { id:'vastgoed-inspectie',  title:'Vastgoed inspectie + oplevering',  branch:'Vastgoedbeheer',         tags:['Inspectie','Foto’s'], demoUrl:'' },
+      { id:'onderwijs-lesplan',   title:'Lesplan + toetsmatrix',            branch:'Onderwijs',              tags:['Curriculum','Planning'], demoUrl:'' },
+      { id:'consulting-scope',    title:'Consulting scope + deliverables',  branch:'Consultancy',            tags:['Scope','Mijlpalen'], demoUrl:'' },
+      { id:'logistiek-rit',       title:'Ritrapport + afleverbewijs',       branch:'Transport & Logistiek',  tags:['POD','Routes'], demoUrl:'' },
+      { id:'nonprofit-project',   title:'Project + grant tracking',         branch:'Non-profit',             tags:['Subsidie','Project'], demoUrl:'' },
+      { id:'juridisch-dossier',   title:'Dossier + taken (light)',          branch:'Juridisch',              tags:['Dossier','Termijnen'], demoUrl:'' },
+      { id:'finance-facturen',    title:'Facturen + opvolgacties',          branch:'Finance/Boekhouding',    tags:['Open','Vervallen'], demoUrl:'' },
+    ];
+    const DEFAULT_DEMO = ""; // zet hier 1 algemene Notion demo link als je wilt
 
-    // Timestamp
-    document.getElementById('ts').textContent = new Date().toISOString();
-
-    // Support e-mail invullen
-    const mail = document.getElementById('supportEmail');
-    mail.href = "mailto:" + SUPPORT_EMAIL;
-    mail.textContent = SUPPORT_EMAIL;
-
-    // CTA’s: als er een echte https-link staat, gebruik die; anders mailto fallback blijft staan
-    function setIfLink(id, url) {
-      if (typeof url === "string" && url.startsWith("https://")) {
-        const a = document.getElementById(id);
-        a.href = url;
-        a.setAttribute("rel", "noopener noreferrer");
-      }
-    }
-    setIfLink("cta39", PAY_REQ_39);
-    setIfLink("cta99", PAY_REQ_99);
-
-    // Kopieer IBAN knop
-    document.getElementById('copyIban').addEventListener('click', async () => {
-      const iban = document.getElementById('iban').textContent.trim();
-      try {
-        await navigator.clipboard.writeText(iban);
-        alert("IBAN gekopieerd: " + iban);
-      } catch {
-        alert("Kon IBAN niet kopiëren — selecteer en kopieer handmatig.");
-      }
+    // filters
+    const filtersEl = document.getElementById('filters');
+    const branches = ['Alles', ...[...new Set(EXAMPLES.map(e=>e.branch))]];
+    let active = 'Alles';
+    branches.forEach(b=>{
+      const btn=document.createElement('button');btn.textContent=b;if(b===active)btn.classList.add('active');
+      btn.onclick=()=>{active=b;[...filtersEl.children].forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderCards();}
+      filtersEl.appendChild(btn);
     });
+
+    // grid
+    const cardsEl = document.getElementById('cards');
+    function renderCards(){
+      cardsEl.innerHTML='';
+      EXAMPLES.filter(e=>active==='Alles'||e.branch===active).forEach(e=>{
+        const el=document.createElement('article');el.className='card';
+        el.innerHTML=
+          `<div class="cover">${e.branch}</div>
+          <h3>${e.title}</h3>
+          <div class="meta">${e.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
+          <div class="actions">
+            <button class="btn" data-id="${e.id}" data-url="${e.demoUrl||DEFAULT_DEMO}">Preview</button>
+            <a class="btn secondary" href="${e.demoUrl||DEFAULT_DEMO||'#'}" target="_blank" rel="noreferrer">Open demo</a>
+          </div>`;
+        cardsEl.appendChild(el);
+      });
+      cardsEl.querySelectorAll('button[data-id]').forEach(btn=>{
+        btn.onclick=()=>openPreview(btn.getAttribute('data-id'),btn.getAttribute('data-url'));
+      });
+    }
+    renderCards();
+
+    // modal
+    const modal=document.getElementById('modal');
+    const frame=document.getElementById('frame');
+    const title=document.getElementById('modalTitle');
+    const openDemo=document.getElementById('openDemo');
+    document.getElementById('close').onclick=()=>modal.classList.remove('open');
+
+    function openPreview(id,url){
+      const item=EXAMPLES.find(x=>x.id===id);
+      title.textContent=item?item.title:'Preview';
+      openDemo.href=url||'#';
+      if(url){ frame.src=url; }
+      else{
+        frame.srcdoc=
+          `<style>
+            body{font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:0;background:#fff;color:#0f1222}
+            .wrap{max-width:920px;margin:0 auto;padding:26px}
+            h1{margin:0 0 .5rem;font-size:28px}
+            .meta{color:#64748b;margin-bottom:14px}
+            .block{border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin:14px 0;background:#fafafa}
+            .tag{display:inline-block;background:#e0f2fe;color:#075985;border-radius:999px;padding:.22rem .6rem;font-size:.8rem;margin-right:.35rem}
+          </style>
+          <div class="wrap">
+            <h1>${item?.title||'Document'}</h1>
+            <div class="meta">${item?.branch||'Branche'} • voorbeeldopmaak</div>
+            <div class="block"><strong>Doel</strong><br> Korte uitleg wat dit document doet en hoe het in Notion is gekoppeld (Taken, Klant, Project).</div>
+            <div class="block"><strong>Velden</strong><br> Titel, Datum, Klant/Project (relatie), Status, Opmerkingen.</div>
+            <div class="block"><strong>Workflow</strong><br> 1) Nieuwe entry 2) Foto’s / bewijs 3) Goedkeuren 4) Delen/Export.</div>
+            <div style="margin-top:10px">${(item?.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+          </div>`;
+      }
+      modal.classList.add('open');
+    }
+
+    document.getElementById('y').textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
